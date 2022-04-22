@@ -77,10 +77,6 @@ public class FixedDepositAccountController {
 
         Date mvDate=fixedDepositAccountMovement.getMovementDate();
         String mvType=fixedDepositAccountMovement.getMovementType();
-//        RestTemplate restTemplate=new RestTemplate();
-//        String urlDp = passPrdUrl +"/fixedDepositAccount/find/" + fixedDepositAccountMovement.getAccountNumber();
-//        ResponseEntity<FixedDepositAccount[]> fixedDepositAccount = restTemplate.getForEntity(urlDp,FixedDepositAccount[].class);
-
         var account = service.findByAccountNumber(fixedDepositAccountMovement.getAccountNumber());
         var _ok = account.flatMap(acc -> {
             try {
@@ -110,31 +106,6 @@ public class FixedDepositAccountController {
             return Mono.just(new FixedDepositAccountMovement());
         });
         return _ok;
-        //var movements = service.findByAccountNumber(fixedDepositAccountMovement.getAccountNumber());
-
-//        String urlBl = passPrdUrl +"/fixedDepositAccountMovement/accountBalance/" + fixedDepositAccountMovement.getAccountNumber();
-//        ResponseEntity<String> balance = restTemplate.getForEntity(urlBl,String.class);
-
-//
-//        String wdDate = fixedDepositAccount.getBody()[0].getWithdrawalDate();
-//        boolean allowWithdrar=false;
-//        try {
-//            Date movement = dateFormat.parse(mvDate);
-//            Date wihtdrawel = dateFormat.parse(wdDate);
-//            if(movement.before(wihtdrawel)){
-//                allowWithdrar=true;
-//            }
-//        }catch (Exception e){}
-//
-//        if(mvType.equals("D")){
-//            return service.create(fixedDepositAccountMovement);
-//        }else{
-//            /** Se valida el monto de retiro */
-//            if(allowWithdrar && Double.parseDouble(fixedDepositAccountMovement.getAmount())<=Double.parseDouble(balance.getBody())){
-//                return service.create(fixedDepositAccountMovement);
-//            }
-//        }
-//        return Mono.just(new FixedDepositAccountMovement());
     }
 
 
@@ -151,19 +122,6 @@ public class FixedDepositAccountController {
     @GetMapping("/accountBalance/{account}")
     public Mono<Double> getAccountBalance(@PathVariable("account") Integer account){
         return fixedDepositAccountMovementService.getBalanceByAccount(account);
-
-//        String urlDp = passPrdUrl +"/fixedDepositAccountMovement/find/" + account;
-//
-//
-//        ResponseEntity<FixedDepositAccountMovement[]> fixedDepositAccountMovements = restTemplate.getForEntity(urlDp,FixedDepositAccountMovement[].class);
-//        for(FixedDepositAccountMovement am: fixedDepositAccountMovements.getBody()){
-//            if (am.getMovementType().equals("D")){
-//                balance += Double.parseDouble(am.getAmount());
-//            }else{
-//                balance -= Double.parseDouble(am.getAmount());
-//            }
-//        }
-//        return String.valueOf(balance);
     }
 
 
