@@ -29,6 +29,20 @@ public class FixedDepositAccountController {
         return service.findByAccountNumber(num);
     }
 
+    /**
+     * Obtiene una lista de las cuentas a Plazo Fijo que posea el Cliente segun su Documento
+     * @param clientId Documento del Cliente (RUC)
+     * @return Lista con las cuentas pertenecientes al Documento
+     */
+    @GetMapping("/findAcountsByClientRuc/{clientRuc}")
+    public Flux<Integer> findAcountsByClientId(@PathVariable("clientId") String clientId) {
+        var accounts = service.findByClientId(clientId);
+        var lst = accounts.map(acc -> {
+            return acc.getAccountNumber();
+        });
+        return lst;
+    }
+
     /** Deposito a Cuenta Plazo Fijo
      *
      * @param fixedDepositAccount

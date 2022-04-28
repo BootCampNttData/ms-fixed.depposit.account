@@ -8,6 +8,7 @@ public interface FixedDepositAccountService {
     Flux<FixedDepositAccount> findAll();
     Mono<FixedDepositAccount> create(FixedDepositAccount fixedDepositAccount);
     Mono<FixedDepositAccount> findByAccountNumber(Integer number);
+    Flux<FixedDepositAccount> findByClientId(String clientId);
     Mono<FixedDepositAccount> update(FixedDepositAccount fixedDepositAccount);
     Mono<FixedDepositAccount> deleteById(String id);
     Mono delete(FixedDepositAccount fixedDepositAccount);

@@ -43,4 +43,9 @@ public class FixedDepositAccountServiceImpl implements FixedDepositAccountServic
     public Mono<FixedDepositAccount> findByAccountNumber(Integer number) {
         return repository.findByAccountNumber(number);
     }
+    @Override
+    public Flux<FixedDepositAccount> findByClientId(String clientId) {
+        return repository.findByClientId(clientId);
+    }
+
 }
