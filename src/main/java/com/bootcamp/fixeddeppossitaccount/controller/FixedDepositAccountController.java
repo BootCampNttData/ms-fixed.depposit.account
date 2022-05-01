@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/fixedDepositAccount")
+@RequestMapping("/fixeddepositaccount")
 @RequiredArgsConstructor
 public class FixedDepositAccountController {
     public final FixedDepositAccountService service;
@@ -34,7 +34,7 @@ public class FixedDepositAccountController {
      * @param clientId Documento del Cliente (RUC)
      * @return Lista con las cuentas pertenecientes al Documento
      */
-    @GetMapping("/findAcountsByClientRuc/{clientRuc}")
+    @GetMapping("/findAcountsByClientRuc/{clientId}")
     public Flux<Integer> findAcountsByClientId(@PathVariable("clientId") String clientId) {
         var accounts = service.findByClientId(clientId);
         var lst = accounts.map(acc -> {
