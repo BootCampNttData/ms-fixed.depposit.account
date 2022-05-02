@@ -35,7 +35,7 @@ public class FixedDepositAccountMovementServiceImpl implements FixedDepositAccou
     }
 
     @Override
-    public Mono<Double> getBalanceByAccount(Integer num) {
+    public Mono<Double> getBalanceByAccount(String num) {
         var movements = this.findByAccountNumber(num);
         var balance = movements
                 .map(mov -> {
@@ -50,7 +50,7 @@ public class FixedDepositAccountMovementServiceImpl implements FixedDepositAccou
     }
 
     @Override
-    public Flux<FixedDepositAccountMovement> findByAccountNumber(Integer num) {
+    public Flux<FixedDepositAccountMovement> findByAccountNumber(String num) {
         return repository.findByAccountNumber(num);
     }
 }

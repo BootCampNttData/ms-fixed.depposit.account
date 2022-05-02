@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,8 +35,8 @@ public class FixedDepositAccountController {
      * @param clientId Documento del Cliente (RUC)
      * @return Lista con las cuentas pertenecientes al Documento
      */
-    @GetMapping("/findAcountsByClientRuc/{clientId}")
-    public Flux<Integer> findAcountsByClientId(@PathVariable("clientId") String clientId) {
+    @GetMapping("/findAcountsByClientId/{clientId}")
+    public Flux<String> findAcountsByClientId(@PathVariable("clientId") String clientId) {
         var accounts = service.findByClientId(clientId);
         var lst = accounts.map(acc -> {
             return acc.getAccountNumber();
@@ -76,7 +77,7 @@ public class FixedDepositAccountController {
     }
 
     @GetMapping("movement/find/{num}")
-    public Flux<FixedDepositAccountMovement> getByAccountNumber(@PathVariable("num") Integer num){
+    public Flux<FixedDepositAccountMovement> getByAccountNumber(@PathVariable("num") String num){
         return fixedDepositAccountMovementService.findByAccountNumber(num);
     }
 
@@ -86,7 +87,7 @@ public class FixedDepositAccountController {
      * @return
      */
     @PostMapping("/movement")
-    public Mono<FixedDepositAccountMovement> create(@RequestBody FixedDepositAccountMovement fixedDepositAccountMovement){
+    public Mono<FixedDepositAccountMovement> create(@RequestBody FixedDepositAccountMovement fixedDepositAccountMovement) {
         SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");
 
         Date mvDate=fixedDepositAccountMovement.getMovementDate();
@@ -134,7 +135,7 @@ public class FixedDepositAccountController {
     }
 
     @GetMapping("/accountBalance/{account}")
-    public Mono<Double> getAccountBalance(@PathVariable("account") Integer account){
+    public Mono<Double> getAccountBalance(@PathVariable("account") String account){
         return fixedDepositAccountMovementService.getBalanceByAccount(account);
     }
 

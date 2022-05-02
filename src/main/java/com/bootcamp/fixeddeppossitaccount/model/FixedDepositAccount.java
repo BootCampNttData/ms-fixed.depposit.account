@@ -10,10 +10,10 @@ import java.util.Date;
 @Document
 public class FixedDepositAccount {
     @Id
-    private String  id;
-    private Integer accountNumber;
-    private Date    depositDate;
-    private Date    withdrawalDate;
-    private Double  percent;
-    private String  clientId;
+    private String id;
+    private String accountNumber;
+    private Date   depositDate;
+    private Date   withdrawalDate;
+    private Double percent;
+    private String clientId;
 }
