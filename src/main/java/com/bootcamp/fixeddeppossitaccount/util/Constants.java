@@ -7,5 +7,4 @@ import org.springframework.beans.factory.annotation.Value;
 public class Constants {
     @Value("${constants.url.server}")
     public static String gwServer;
-
 }
